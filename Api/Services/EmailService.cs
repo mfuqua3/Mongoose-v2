@@ -1,11 +1,11 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
-using Api.Configuration;
 using Microsoft.Extensions.Options;
+using Mongoose.Api.Configuration;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
-namespace Api.Services
+namespace Mongoose.Api.Services
 {
     public class EmailService : IEmailService
     {

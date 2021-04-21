@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Core.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Mongoose.Core.Entities;
 
-namespace Core
+namespace Mongoose.Core
 {
-    public class DbContext:IdentityDbContext<AppUser>
+    public class MongooseContext:IdentityDbContext<AppUser>
     {
-        public DbContext(DbContextOptions<DbContext> options):base(options)
+        public MongooseContext(DbContextOptions<MongooseContext> options):base(options)
         {
             
         }

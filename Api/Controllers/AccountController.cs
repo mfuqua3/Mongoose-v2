@@ -1,20 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Api.Models.Account.Request;
-using Api.Models.Account.Response;
-using Api.Services;
-using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Mongoose.Api.Models.Account.Request;
+using Mongoose.Api.Models.Account.Response;
+using Mongoose.Api.Services;
+using Mongoose.Core.Entities;
 
-namespace Api.Controllers
+namespace Mongoose.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Api.Models
+namespace Mongoose.Api.Models
 {
     public class MapperProfile:Profile
     {

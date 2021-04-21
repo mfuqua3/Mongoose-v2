@@ -1,4 +1,4 @@
-﻿namespace Api.Models.Account.Response
+﻿namespace Mongoose.Api.Models.Account.Response
 {
     public class LoginResponse
     {

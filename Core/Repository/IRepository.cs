@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Entities;
+using Mongoose.Core.Entities;
 
-namespace Core.Repository
+namespace Mongoose.Core.Repository
 {
     public interface IRepository<TEntity, in TId>
         where TEntity : IEntity<TId>

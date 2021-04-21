@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Immutable;
 using System.Security.Claims;
-using Api.Models;
+using Mongoose.Api.Models;
 
-namespace Api.Services
+namespace Mongoose.Api.Services
 {
     public interface IJwtAuthService
     {

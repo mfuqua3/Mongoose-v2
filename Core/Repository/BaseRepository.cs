@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Mongoose.Core.Entities;
 
-namespace Core.Repository
+namespace Mongoose.Core.Repository
 {
     public abstract class BaseRepository<TEntity, TId> : IRepository<TEntity, TId>
         where TEntity : class, IEntity<TId>
         where TId : struct, IEquatable<TId>
     {
-        protected readonly DbContext DbContext;
+        protected readonly MongooseContext MongooseContext;
         protected readonly DbSet<TEntity> DbSet;
 
-        protected BaseRepository(DbContext dbContext)
+        protected BaseRepository(MongooseContext mongooseContext)
         {
-            DbContext = dbContext;
-            DbSet = dbContext.Set<TEntity>();
+            MongooseContext = mongooseContext;
+            DbSet = mongooseContext.Set<TEntity>();
         }
 
         public async Task<bool> Contains(TId id)
@@ -52,7 +52,7 @@ namespace Core.Repository
             if (existingEntity == null)
                 throw new InvalidOperationException(
                     "Invalid PUT operation, no entity exists in the database with the specified ID.");
-            DbContext.Entry(existingEntity).CurrentValues.SetValues(entity);
+            MongooseContext.Entry(existingEntity).CurrentValues.SetValues(entity);
         }
 
         public virtual async Task<TEntity> Delete(TId id)
@@ -67,7 +67,7 @@ namespace Core.Repository
 
         public async Task Save()
         {
-            await DbContext.SaveChangesAsync();
+            await MongooseContext.SaveChangesAsync();
         }
 
         protected IQueryable<TEntity> GetModifiedQuery(QueryInject<TEntity> queryInject)

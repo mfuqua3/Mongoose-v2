@@ -1,25 +1,24 @@
 using System;
 using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using Api.Configuration;
-using Api.Models;
-using Api.Services;
-using AutoMapper;
-using Core.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using SendGrid;
-using DbContext = Core.DbContext;
+using Microsoft.OpenApi.Models;
+using Mongoose.Api.Configuration;
+using Mongoose.Api.Models;
+using Mongoose.Api.Services;
+using Mongoose.Core;
+using Mongoose.Core.Entities;
 
-namespace Api
+namespace Mongoose.Api
 {
     public class Startup
     {
@@ -37,7 +36,7 @@ namespace Api
             services.Configure<ApplicationOptions>(Configuration.GetSection("Application"));
             services.Configure<SendGridOptions>(Configuration.GetSection("SendGrid"));
 
-            services.AddDbContext<DbContext>(opt=>opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<MongooseContext>(opt=>opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
@@ -48,14 +47,14 @@ namespace Api
                 opt.Password.RequiredLength = 8;
                 opt.User.RequireUniqueEmail = true;
             })
-                .AddEntityFrameworkStores<DbContext>()
+                .AddEntityFrameworkStores<MongooseContext>()
                 .AddDefaultTokenProviders();
 
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MongooseApi", Version = "v1" });
             });
 
             var mapperConfig = new MapperConfiguration(cfg =>
@@ -92,7 +91,7 @@ namespace Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MongooseApi v1"));
             }
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions

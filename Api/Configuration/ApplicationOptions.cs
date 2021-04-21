@@ -1,4 +1,4 @@
-﻿namespace Api.Configuration
+﻿namespace Mongoose.Api.Configuration
 {
     public class ApplicationOptions
     {

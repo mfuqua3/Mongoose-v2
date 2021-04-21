@@ -1,4 +1,4 @@
-﻿namespace Api.Models.Account.Request
+﻿namespace Mongoose.Api.Models.Account.Request
 {
     public class ForgotPasswordRequest
     {

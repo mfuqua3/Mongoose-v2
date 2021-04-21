@@ -6,12 +6,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Api.Configuration;
-using Api.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Mongoose.Api.Configuration;
+using Mongoose.Api.Models;
 
-namespace Api.Services
+namespace Mongoose.Api.Services
 {
     public class JwtAuthService : IJwtAuthService
     {

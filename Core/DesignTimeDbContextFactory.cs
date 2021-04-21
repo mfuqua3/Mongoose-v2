@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace Core
+namespace Mongoose.Core
 {
-    public class DesignTimeDbContextFactory:IDesignTimeDbContextFactory<DbContext>
+    public class DesignTimeDbContextFactory:IDesignTimeDbContextFactory<MongooseContext>
     {
-        public DbContext CreateDbContext(string[] args)
+        public MongooseContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<DbContext>()
+            var optionsBuilder = new DbContextOptionsBuilder<MongooseContext>()
                 .UseNpgsql("Host=localhost;Database=BoilerplateTest;Username=postgres;password=Apples!Pandemic");
-            return new DbContext(optionsBuilder.Options);
+            return new MongooseContext(optionsBuilder.Options);
         }
     }
 }

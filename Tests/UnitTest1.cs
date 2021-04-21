@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Tests
+namespace Mongoose.Tests
 {
     public class Tests
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
 
-namespace Core.Entities
+namespace Mongoose.Core.Entities
 {
     public class AppUser : IdentityUser, IEntity<string>
     {

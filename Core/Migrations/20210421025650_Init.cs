@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Core.Migrations
+namespace Mongoose.Core.Migrations
 {
     public partial class Init : Migration
     {
