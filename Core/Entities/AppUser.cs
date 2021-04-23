@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
+using Mongoose.Core.Entities.BaseTypes;
 
 namespace Mongoose.Core.Entities
 {

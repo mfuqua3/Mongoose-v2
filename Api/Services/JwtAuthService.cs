@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Mongoose.Api.Configuration;
 using Mongoose.Api.Models;
+using Mongoose.Api.Services.Contracts;
 
 namespace Mongoose.Api.Services
 {

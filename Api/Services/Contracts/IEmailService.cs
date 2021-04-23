@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 
-namespace Mongoose.Api.Services
+namespace Mongoose.Api.Services.Contracts
 {
     public interface IEmailService
     {

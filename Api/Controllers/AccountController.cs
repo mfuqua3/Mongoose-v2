@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Mongoose.Api.Models.Account.Request;
 using Mongoose.Api.Models.Account.Response;
 using Mongoose.Api.Services;
+using Mongoose.Api.Services.Contracts;
 using Mongoose.Core.Entities;
 
 namespace Mongoose.Api.Controllers

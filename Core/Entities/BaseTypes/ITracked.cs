@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mongoose.Core.Entities
+namespace Mongoose.Core.Entities.BaseTypes
 {
     public interface ITracked
     {

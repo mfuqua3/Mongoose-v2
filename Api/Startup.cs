@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -12,9 +13,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Mongoose.Api.BackgroundServices;
 using Mongoose.Api.Configuration;
 using Mongoose.Api.Models;
 using Mongoose.Api.Services;
+using Mongoose.Api.Services.Contracts;
+using Mongoose.Common.Utility;
 using Mongoose.Core;
 using Mongoose.Core.Entities;
 
@@ -59,9 +63,9 @@ namespace Mongoose.Api
 
             var mapperConfig = new MapperConfiguration(cfg =>
             {
+                cfg.AddProfile<MongooseCommonProfile>();
                 cfg.AddProfile<MapperProfile>();
             });
-            services.AddSingleton(mapperConfig.CreateMapper());
             var jwtOptions = Configuration.GetSection("JwtToken").Get<JwtTokenOptions>();
             services.AddAuthentication()
                 .AddJwtBearer(opt =>
@@ -80,8 +84,13 @@ namespace Mongoose.Api
                         ClockSkew = TimeSpan.FromMinutes(1)
                     };
                 });
+            services.AddSingleton(mapperConfig.CreateMapper());
+            services.AddCommonComponents(Configuration);
+            services.AddRepositories();
             services.AddSingleton<IJwtAuthService, JwtAuthService>()
-                .AddSingleton<IEmailService, EmailService>();
+                .AddSingleton<IEmailService, EmailService>()
+                .AddTransient<IStaticFileService, StaticFileService>();
+            services.AddHostedService<VideoFilingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,20 +103,7 @@ namespace Mongoose.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MongooseApi v1"));
             }
 
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedProto
-            });
-            app.UseCookiePolicy(new CookiePolicyOptions()
-            {
-                MinimumSameSitePolicy = SameSiteMode.Lax
-            });
-            app.UseCors(opt =>
-                opt.AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowAnyOrigin());
-
-            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Mongoose.Api.Configuration;
+using Mongoose.Api.Services.Contracts;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
@@ -9,9 +10,9 @@ namespace Mongoose.Api.Services
 {
     public class EmailService : IEmailService
     {
-        private SendGridClient _sendGridClient;
-        private ApplicationOptions _applicationConfig;
-        private SendGridOptions _sendGridConfig;
+        private readonly SendGridClient _sendGridClient;
+        private readonly ApplicationOptions _applicationConfig;
+        private readonly SendGridOptions _sendGridConfig;
 
         public EmailService(IOptions<SendGridOptions> sendGridOptions, IOptions<ApplicationOptions> applicationOptions)
         {
